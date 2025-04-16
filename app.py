@@ -46,4 +46,4 @@ def index():
     return render_template('index.html', cluster_summary=cluster_summary, plot_path=plot_path)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
