@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Segmentation</title>
+</head>
+<body>
+    <h1>Customer Segmentation with K-Means</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <p>Upload your dataset (CSV):</p>
+        <input type="file" name="file" required>
+        <button type="submit">Run Clustering</button>
+    </form>
+
+    {% if cluster_summary is not none and not cluster_summary.empty %}
+    <h2>Cluster Summary</h2>
+    <table border="1">
+        <tr>
+            <th>Cluster</th>
+            <th>Age</th>
+            <th>Annual Income (k$)</th>
+            <th>Spending Score (1-100)</th>
+        </tr>
+        {% for cluster, row in cluster_summary.iterrows() %}
+        <tr>
+            <td>{{ cluster }}</td>
+            <td>{{ row['Age'] }}</td>
+            <td>{{ row['Annual Income (k$)'] }}</td>
+            <td>{{ row['Spending Score (1-100)'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Cluster Visualization</h2>
+    <img src="{{ url_for('static', filename='cluster_plot.png') }}" width="500">
+    {% else %}
+        <p>No data available for clustering.</p>
+    {% endif %}
+</body>
+</html>
